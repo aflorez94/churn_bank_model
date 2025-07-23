@@ -8,11 +8,11 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import (
     confusion_matrix, classification_report,
-    mean_absolute_error, mean_squared_error, roc_auc_score
+    mean_absolute_error, mean_squared_error, roc_auc_score, RocCurveDisplay
 )
+import lightgbm as lgb
 from shapash.explainer.smart_explainer import SmartExplainer
-#from lightgbm import LGBMClassifier
-#from explainerdashboard import ClassifierExplainer, ExplainerDashboard
+
 #csv
 df = pd.read_csv("/Users/aflorez/Downloads/BankChurners.csv")
 
@@ -80,19 +80,6 @@ plt.show()
 
 
 #### MODELO DE LIGHTGBM   ######
-
-
-import pandas as pd
-import numpy as np
-import lightgbm as lgb
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import (
-    confusion_matrix, classification_report,
-    mean_absolute_error, mean_squared_error, roc_auc_score,
-    RocCurveDisplay
-)
-import matplotlib.pyplot as plt
-#import seaborn as sns
 
 df = pd.read_csv("/Users/aflorez/Downloads/BankChurners.csv")
 df = df.drop(columns=[
