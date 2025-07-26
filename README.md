@@ -1,55 +1,4 @@
-Predicting Customer Churn
-
-
-This project demonstrates applying a 3 step general-purpose framework to solve problems with machine learning. The purpose of this framework is to provide a scaffolding for rapidly developing machine learning solutions across industries and datasets.
-
-The end outcome is a both a specific solution to a customer churn use case, with a reduction in revenue lost to churn of more than 10%, as well as a general approach you can use to solve your own problems with machine learning.
-
-Framework Steps
-Prediction engineering
-State business need
-Translate business requirement into machine learning task by specifying problem parameters
-Develop set of labels along with cutoff times for supervised machine learning
-Feature Engineering
-Create features - predictor variables - out of raw data
-Use cutoff times to make valid features for each label
-Apply automated feature engineering to automatically make hundreds of relevant, valid features
-Modeling
-Train a machine learning model to predict labels from features
-Use a pre-built solution with common libraries
-Optimize model in line with business objectives
-Machine learning currently is an ad-hoc process requiring a custom solution for each problem. Even for the same dataset, a slightly different prediction problem requires an entirely new pipeline built from scratch. This has made it too difficult for many companies to take advantage of the benefits of machine learning. The standardized procedure presented here will make it easier to solve meaningful problems with machine learning, allowing more companies to harness this transformative technology.
-
-Application to Customer Churn
-The notebooks in this repository document a step-by-step application of the framework to a real-world use case and dataset - predicting customer churn. This is a critical need for subscription-based businesses and an ideal application of machine learning.
-
-The dataset is provided by KKBOX, Asia's largest music streaming service, and can be downloaded here.
-
-Within the overall scaffolding, several standard data science toolboxes are used to solve the problem:
-
-Featuretools: automated feature engineering
-Pandas: data munging and engineering
-Scikit-Learn: standard machine learning algorithms
-Apache Spark with PySpark: Running comptutations in parallel
-TPOT (Tree-based Pipeline Optimization Tool): model selection optimization using genetic algorithms
-Results
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# PREDICCION DE DESERCIÓN BANCARIA
+# PREDICCIÓN DE DESERCIÓN BANCARIA
 <img width="800" height="428" alt="image" src="https://github.com/user-attachments/assets/9bc8a8d8-265a-41cc-aeaf-f6b3f6eb28de" />
 
 ## Introducción
@@ -96,84 +45,72 @@ Hasta este punto se ha realizado una exploración detallada del conjunto de dato
 
 Hasta este punto se ha realizado una exploración detallada del conjunto de datos. Algunas variables muestran diferencias marcadas entre los clientes que abandonan y los que permanecen, como la edad y el saldo bancario. Los clientes que abandonan tienen en promedio 7 años más y saldos superiores por más de 18 mil euros. Esto sugiere que estas variables podrían ser útiles para predecir el abandono. También se observan diferencias por país y género, aunque de menor magnitud.
 
-## Estadíticas Generales
-Picture 1, Imagen, Imagen
- 
+### Estadíticas Generales
+<img width="804" height="195" alt="image" src="https://github.com/user-attachments/assets/b69fca40-dd66-4251-8aa0-93e99fd9d848" />
+
+ <img width="724" height="242" alt="image" src="https://github.com/user-attachments/assets/8d1135c2-c203-485a-bb55-503420852505" />
+
  
 
-Hipotesis de Variables
+### Hipotesis de Variables
 Buscamos analizar las variables con el fin de identificar cual de estas varibles puede ayudar al modelo a distinguir una clase de la otra.
+
 Total_Trans_Ct y Total_Trans_Amt: Los clientes que abandonaron (Attrited) suelen tener menos transacciones y menor volumen total.
 
 
+<img width="402" height="248" alt="image" src="https://github.com/user-attachments/assets/c0163d3f-3e1c-450d-947c-35c6fec0c34d" />
 
-
- 
-
-
-
-
-
+<img width="411" height="254" alt="image" src="https://github.com/user-attachments/assets/3b39d0f7-77f9-4f20-9ff3-a4feda38609f" />
 
 
 Avg_Utilization_Ratio: Tiende a ser mayor en clientes que se fueron → utilizan más porcentaje de su crédito disponible.
 
 
-
-
-
-
-
+<img width="531" height="350" alt="image" src="https://github.com/user-attachments/assets/091cd904-25cb-4fe0-b78e-8bcaff259f1c" />
 
 
 Total_Amt_Chng_Q4_Q1 y Total_Ct_Chng_Q4_Q1: Los Attrited tienen cambios más bajos en montos y frecuencia ente trimestres → menor actividad reciente.
 
- 
 
+<img width="555" height="354" alt="image" src="https://github.com/user-attachments/assets/7f13143e-ee7b-405b-8e41-f3eb690fe9e7" />
+
+<img width="582" height="371" alt="image" src="https://github.com/user-attachments/assets/7e8750f9-4179-4816-a818-707c7e742e37" />
 
 Total_Revolving_Bal por clase de cliente: tiende a ser mas bajo para los clientes Attrited.
- 
 
-Target
-TARGET	Count	%
-Attrited Customer (1)	1,627	16.07%
-Existing Customer (0)	8,500	83.93%
-Grand Total	10,127	100.00%
+
+<img width="523" height="250" alt="image" src="https://github.com/user-attachments/assets/2825f973-0196-442e-88ae-38d03e10ce61" />
 
 
 
+### Target
+
+<img width="645" height="110" alt="image" src="https://github.com/user-attachments/assets/493d57f6-6e90-4ffa-b43e-9584585cc6b8" />
 
 
 
+## Entrenamiento de Modelo
 
-
-
-
-Entrenamiento de Modelo
-
-Limpieza de Datos se eliminaron, las columnas:
-df = df.drop(columns=[
+### Limpieza de Datos se eliminaron, las columnas:
+* df = df.drop(columns=[
     'CLIENTNUM',
 'Naive_Bayes_Classifier_Attrition_Flag_Card_Category_Contacts_Count_12_mon_Dependent_count_Education_Level_Months_Inactive_12_mon_1',
 'Naive_Bayes_Classifier_Attrition_Flag_Card_Category_Contacts_Count_12_mon_Dependent_count_Education_Level_Months_Inactive_12_mon_2'
 ])
 
-Split data 
-Se dividió la data en 80/20, reservando 20% para el testeo.
-#### TRAIN #####
-X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y, test_size=0.2, random_state=42)
+### Split data 
+ 
+* Se dividió la data en 80/20, reservando 20% para el testeo.
+  
+### TRAIN
 
-Modelos Entrenados
+* X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y, test_size=0.2, random_state=42)
+
+# Modelos Entrenados
+
 Se entrenaron 2 modelos de clasificación, RandomForestClassifier y LGBMClassifier  y se compararon sus desempeños.
 
-
-
-
-
-
-
-
-RANDOM FOREST
+## RANDOM FOREST
 Métricas de Desempeño:
                precision    recall  f1-score   support
 
@@ -189,30 +126,19 @@ RMSE: 0.2119
 MAPE: 4.49%
 AUC ROC: 0.9841
 
-Matriz de Confusión
+### Matriz de Confusión
+
+<img width="426" height="367" alt="image" src="https://github.com/user-attachments/assets/07374f85-2a02-44eb-8f63-bc9f189f843c" />
+
+### Curva ROC
+
+
+<img width="509" height="393" alt="image" src="https://github.com/user-attachments/assets/36dbbffc-f371-4294-85a2-abf87ef5d42a" />
 
 
 
 
-
-
-
-
-
-Curva ROC
-
-
-
-
-
-
-
-
-
-
-
-
-LIGHTGBM
+## LIGHTGBM
 Métricas de Desempeño:
                precision    recall  f1-score   support
 
@@ -228,89 +154,38 @@ RMSE: 0.1617
 MAPE: 2.62%
 AUC ROC: 0.9925
 
-Matriz de Confusión
+### Matriz de Confusión
 
-
-
-
-
-
-
-
-
-
-
-
+<img width="602" height="473" alt="image" src="https://github.com/user-attachments/assets/b572bcfe-6b44-4f17-bf1f-793d3dda0686" />
 
 Curva ROC
 
+<img width="477" height="368" alt="image" src="https://github.com/user-attachments/assets/de6f1d51-f2dd-48ca-a792-a9e1cd39cc91" />
+
+
+## COMPARATIVA DE MODELOS
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-COMPARATIVA DE MODELOS
-
-
-		precision	recall	f1-score	support
-CLASE 1	RANDOM FOREST	0.94	0.77	0.85	325
-	LIGHTGBM	0.94	0.89	0.92	325
-
-
-
-
-MEDIDAS	RANDOM FOREST	LIGHTGBM
-MAE	0.0449	0.0262
-RMSE	0.2119	0.1617
-MAPE	4.49%	0.0262
-AUC ROC	0.9841	0.9925
+<img width="866" height="468" alt="image" src="https://github.com/user-attachments/assets/da4a20c2-e404-4941-906b-f0b0413b0837" />
 
 
 Si bien ambos modelos son muy buenos modelos y lograr separar las clases de buena manera, el modelo de Lightgbm es mejor que el Random Forest opteniendo mejores métricas y destaca en la captura de mayores casos de deserción. Tambien sus erros son mas bajos, por todo esto el escogeremos el modelo de Lightgbm.
 
 
 
-Analisis de Modelo
+# Analisis de Modelo
 
+## FEATURE IMPORTANCE
 
-
-
-FEATURE IMPORTANCE
-
+<img width="560" height="443" alt="image" src="https://github.com/user-attachments/assets/d9d2c6b6-fdf1-46e2-9a91-52328f8ddf36" />
 
 Cabe mencionar que podemos ver cómo algunas de las features de nuestras hipotesis tienen alto nivel de relevancia para el modelo.
 
 
-Análisis de Shaps
+## Análisis de Shaps
 
-
+<img width="169" height="176" alt="image" src="https://github.com/user-attachments/assets/5e7cbb99-4eb9-4002-8d6a-975f033f33d1" />
 
 Un análisis de SHAP (SHapley Additive exPlanations) es una técnica para explicar cómo cada característica (variable) contribuye a la predicción de un modelo de machine learning. SHAP te dice cuánto y en qué dirección cada variable influye en la predicción de un modelo.
 
@@ -335,38 +210,17 @@ xpl.compile(
 )
 
 
-Dashboard Generado
+## Dashboard Generado
+### Principales Features
+
+<img width="595" height="452" alt="image" src="https://github.com/user-attachments/assets/391770e5-02fb-4113-95b2-80e660c9f273" />
 
 
+### Total_Trans_Ct
 
 
+<img width="720" height="478" alt="image" src="https://github.com/user-attachments/assets/7efd768d-64ae-404a-8780-7090e724d236" />
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Principales Features
-
-
-Total_Trans_Ct
-
- 
 
 En la linea vertical podemos observar el valor shap, cuando es mayor a 0 tiene impacto positivo en la predicción del modelo, cuando es negativo tiene un impacto negativo en la predicción y cero neutro.
 
@@ -374,43 +228,36 @@ En este caso, cuando los valores de la variable Total_trans_ct, estan entre 0 y 
 
 En otras palabras si analizamos esta feature en particular, los clientes con Total_trans_ct, tienen mas probabilidades de desertar.
 
+<img width="703" height="460" alt="image" src="https://github.com/user-attachments/assets/64143c73-8af0-4531-845f-3847b711e72c" />
+
+<img width="710" height="459" alt="image" src="https://github.com/user-attachments/assets/14fed143-55de-4f06-9444-ab5a494f9866" />
 
 
+# Conclusión
 
-
-
-
-
-
-
-
-
-
-Conclusión
 El objetivo principal de este proyecto fue desarrollar un modelo de clasificación capaz de predecir qué clientes de un banco tienen alta probabilidad de desertar (churn), con base en variables disponibles. 
 Esta capacidad predictiva es crucial para permitirle al banco implementar estrategias preventivas de retención, con impacto directo en la reducción de pérdidas financieras.
 Para la modelación, se emplearon dos algoritmos poderosos:
-•	Random Forest Classifier
-•	LightGBM (Light Gradient Boosting Machine)
+* Random Forest Classifier
+* LightGBM (Light Gradient Boosting Machine)
 Ambos modelos demostraron un alto poder predictivo y ambos clasificadores fueron capaces de separar correctamente las clases (clientes existentes vs. desertores).
 Sin embargo LightGBM demostró tener mejores métricas generales.
  Entre las ventajas observadas:
-•	Mayor AUC (más capacidad para separar clases en diferentes umbrales).
-•	Menor MAE y RMSE (más precisión en las predicciones).
-•	Mejores tasas de recall para detectar desertores.
+* Mayor AUC (más capacidad para separar clases en diferentes umbrales).
+* Menor MAE y RMSE (más precisión en las predicciones).
+* Mejores tasas de recall para detectar desertores.
 Por estas razones, LightGBM fue elegido como el modelo final, al ser más adecuado para este tipo de clasificación desequilibrada y por su rendimiento computacional eficiente.
 Contar con un modelo predictivo de churn permite al banco:
-•	Identificar clientes en riesgo de abandonar con anticipación.
-•	Lanzar campañas personalizadas de retención (como beneficios, llamadas, ofertas).
-•	Optimizar recursos de marketing, enfocando esfuerzos en los perfiles con más probabilidad de desertar.
-•	Reducir la pérdida de ingresos por cancelaciones de cuentas o tarjetas.
+* Identificar clientes en riesgo de abandonar con anticipación.
+* Lanzar campañas personalizadas de retención (como beneficios, llamadas, ofertas).
+* Optimizar recursos de marketing, enfocando esfuerzos en los perfiles con más probabilidad de desertar.
+* Reducir la pérdida de ingresos por cancelaciones de cuentas o tarjetas.
 Este proyecto demuestra el gran valor que aportan las herramientas de machine learning al negocio:
 Machine Learning es herramienta fundamental para la competitividad, especialmente en industrias como la banca, donde la fidelización del cliente es esencial.
 
-Próximos pasos recomendados
-•	Integrar el modelo en procesos operativos del banco.
-•	Automatizar alertas para clientes en riesgo.
-•	Monitorear el rendimiento del modelo con nuevos datos en producción.
-•	Experimentar con estrategias de retención basadas en los factores más relevantes.
-<img width="468" height="622" alt="image" src="https://github.com/user-attachments/assets/d144f8f7-5d25-4c8a-8f1e-f402ef098863" />
+## Próximos pasos recomendados
+* Integrar el modelo en procesos operativos del banco.
+* Automatizar alertas para clientes en riesgo.
+* Monitorear el rendimiento del modelo con nuevos datos en producción.
+* Experimentar con estrategias de retención basadas en los factores más relevantes.
 
