@@ -1,12 +1,68 @@
-Introducción
+Predicting Customer Churn
+
+
+This project demonstrates applying a 3 step general-purpose framework to solve problems with machine learning. The purpose of this framework is to provide a scaffolding for rapidly developing machine learning solutions across industries and datasets.
+
+The end outcome is a both a specific solution to a customer churn use case, with a reduction in revenue lost to churn of more than 10%, as well as a general approach you can use to solve your own problems with machine learning.
+
+Framework Steps
+Prediction engineering
+State business need
+Translate business requirement into machine learning task by specifying problem parameters
+Develop set of labels along with cutoff times for supervised machine learning
+Feature Engineering
+Create features - predictor variables - out of raw data
+Use cutoff times to make valid features for each label
+Apply automated feature engineering to automatically make hundreds of relevant, valid features
+Modeling
+Train a machine learning model to predict labels from features
+Use a pre-built solution with common libraries
+Optimize model in line with business objectives
+Machine learning currently is an ad-hoc process requiring a custom solution for each problem. Even for the same dataset, a slightly different prediction problem requires an entirely new pipeline built from scratch. This has made it too difficult for many companies to take advantage of the benefits of machine learning. The standardized procedure presented here will make it easier to solve meaningful problems with machine learning, allowing more companies to harness this transformative technology.
+
+Application to Customer Churn
+The notebooks in this repository document a step-by-step application of the framework to a real-world use case and dataset - predicting customer churn. This is a critical need for subscription-based businesses and an ideal application of machine learning.
+
+The dataset is provided by KKBOX, Asia's largest music streaming service, and can be downloaded here.
+
+Within the overall scaffolding, several standard data science toolboxes are used to solve the problem:
+
+Featuretools: automated feature engineering
+Pandas: data munging and engineering
+Scikit-Learn: standard machine learning algorithms
+Apache Spark with PySpark: Running comptutations in parallel
+TPOT (Tree-based Pipeline Optimization Tool): model selection optimization using genetic algorithms
+Results
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# PREDICCION DE DESERCIÓN BANCARIA
+<img width="800" height="428" alt="image" src="https://github.com/user-attachments/assets/9bc8a8d8-265a-41cc-aeaf-f6b3f6eb28de" />
+
+## Introducción
 
 La retención de clientes en el sector bancario es un desafío fundamental para la sostenibilidad financiera de cualquier institución. La competencia en la industria, junto con la facilidad con la que los clientes pueden migrar a otras entidades, hace que la fidelización se convierta en una prioridad estratégica. 
-Por otro lado, fidelización de clientes individualizada es difícil, la mayoría de las empresas tienen una gran cantidad de clientes y no pueden dedicar mucho tiempo a cada uno. Adicional los costes serían excesivos, superando los ingresos adicionales. Sin embargo, si una empresa pudiera prever qué clientes es probable que abandonen la empresa, podría centrar sus esfuerzos de fidelización únicamente en estos clientes de alto riesgo 	de deserción.
+
+Por otro lado, fidelización de clientes individualizada es difícil, la mayoría de las empresas tienen una gran cantidad de clientes y no pueden dedicar mucho tiempo a cada uno. Adicional los costes serían excesivos, superando los ingresos adicionales. Sin embargo, si una empresa pudiera prever qué clientes es probable que abandonen la empresa, podría centrar sus esfuerzos de fidelización únicamente en estos clientes de alto riesgo de deserción.
+
 La pérdida de clientes es una métrica importante,  porque a largo plazo para el banco es mucho más económico y seguro, retener a los clientes existentes que adquirir nuevos.
 Este proyecto tiene como objetivo analizar un conjunto de datos bancarios para comprender los factores asociados al abandono de clientes y detectar señales tempranas de una posible pérdida, para desarrollar un modelo predictivo. Para ello, se realiza un análisis estadístico exploratorio detallado de las variables disponibles, enfocándose en aquellas que podrían ayudar a predecir el comportamiento de los clientes más propensos a deserción y de esta forma dedicar un plan de fidelización para estos clientes,  disminuyendo la pérdida de clientes y minimizando los costos de campañas de fidelización.
 
 
-Justificación
+## Justificación
 
 El costo de adquirir un nuevo cliente bancario suele ser significativamente más alto que el de retener uno existente, además,  un cliente nuevo no significa un cliente permanente y toma tiempo construir una relación de confianza y que la empresa recupere la inversión de captar ese cliente.Por tanto, identificar clientes en riesgo de abandono permite diseñar estrategias proactivas que reduzcan drásticamente la perdida de clientes en la empresa. 
 Mediante herramientas estadíticas y modelos predictivos, es posible construir modelos que anticipen esta conducta de abandono que no permita tomar acciones de perder un cliente.
@@ -14,7 +70,8 @@ Este proyecto busca sentar las bases para dicha predicción a partir de datos de
 
 
 
-Antecedentes
+## Antecedentes
+
 Existen múltiples estudios que abordan la predicción del abandono de clientes (customer churn) mediante técnicas de machine learning. 
 Por ejemplo, un artículo publicado por IBM presenta el uso de árboles de decisión y modelos de boosting para detectar churn en telecomunicaciones. 
 https://www.ibm.com/cloud/learn/customer-churn-prediction
@@ -26,15 +83,21 @@ Además, plataformas como Kaggle albergan competencias con datasets similares, m
 https://www.kaggle.com/blastchar/telco-customer-churn
 
 
-Definición del problema
-¿Qué características definen a los clientes con mayor probabilidad de abandonar el banco? Esta investigación busca identificar y cuantificar esas variables clave a partir de un análisis exploratorio de datos históricos, en preparación para una posterior etapa de modelado predictivo.
+## Definición del problema
+
+¿Qué características definen a los clientes con mayor probabilidad de abandonar el banco?
+
+Esta investigación busca identificar y cuantificar esas variables clave a partir de un análisis exploratorio de datos históricos, en preparación para una posterior etapa de modelado predictivo.
 Avance del análisis predictivo y Visualizaciones
 Hasta este punto se ha realizado una exploración detallada del conjunto de datos. Algunas variables muestran diferencias marcadas entre los clientes que abandonan y los que permanecen, como la edad y el saldo bancario. Los clientes que abandonan tienen en promedio 7 años más y saldos superiores por más de 18 mil euros. Esto sugiere que estas variables podrían ser útiles para predecir el abandono. También se observan diferencias por país y género, aunque de menor magnitud.
 
 
-Avance del análisis predictivo y Visualizaciones
+## Avance del análisis predictivo y Visualizaciones
+
 Hasta este punto se ha realizado una exploración detallada del conjunto de datos. Algunas variables muestran diferencias marcadas entre los clientes que abandonan y los que permanecen, como la edad y el saldo bancario. Los clientes que abandonan tienen en promedio 7 años más y saldos superiores por más de 18 mil euros. Esto sugiere que estas variables podrían ser útiles para predecir el abandono. También se observan diferencias por país y género, aunque de menor magnitud.
-Estadíticas Generales
+
+## Estadíticas Generales
+Picture 1, Imagen, Imagen
  
  
 
